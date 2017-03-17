@@ -1,36 +1,62 @@
 $(document).ready(function() {
 
-  function init() {
+  function autocompleteStartLocation() {
     var dest = document.getElementById('destField');
     var autocomplete = new google.maps.places.Autocomplete(dest);
   }
 
-  function dest() {
-
+  function autocompleteDestination() {
     var initial = document.getElementById('initField');
     var autocomplete = new google.maps.places.Autocomplete(initial);
   }
-  google.maps.event.addDomListener(window, 'load', init);
-  google.maps.event.addDomListener(window, 'load', dest);
+  google.maps.event.addDomListener(window, 'load', autocompleteStartLocation);
+  google.maps.event.addDomListener(window, 'load', autocompleteDestination);
 
-  function doGeocode(addr) {
+  var startLat = "";
+  var startLong = "";
+  var destLat = "";
+  var destLong = "";
+
+  //Google maps api to validate address and get lat/long
+  function checkPrice(dest, initial) {
     // Get geocoder instance
     var geocoder = new google.maps.Geocoder();
 
     // Geocode the address
     geocoder.geocode({
-      'address': addr.value
-    }, function(results, status) {
-      if (status === google.maps.GeocoderStatus.OK && results.length > 0) {
+      'address': dest.value
+    }, destinationResults);
 
-        // set it to the correct, formatted address if it's valid
-        addr.value = results[0].formatted_address;
-        return true;
-      // show an error if it's not
-      }
-      return false;
-    });
+    geocoder.geocode({
+      'address': initial.value
+    }, startLocationResults);
+
+
   }
+
+  function destinationResults(results, status) {
+    if (status === google.maps.GeocoderStatus.OK && results.length > 0) {
+
+      destLat = results[0].geometry.location.lat();
+      destLong = results[0].geometry.location.lng();
+    // show an error if it's not
+    } else {
+      console.log(status);
+      console.log(results);
+    }
+  }
+
+  function startLocationResults(results, status) {
+    if (status === google.maps.GeocoderStatus.OK && results.length > 0) {
+      startLat = results[0].geometry.location.lat();
+      startLong = results[0].geometry.location.lng();
+    // show an error if it's not
+    } else {
+      console.log(status);
+      console.log(results);
+    }
+  }
+
 
   $('#search').click(function() {
     var dest = document.getElementById('destField');
@@ -39,18 +65,7 @@ $(document).ready(function() {
       alert("Location values must be set!");
     } else {
       checkPrice(dest, initial);
-
     }
-
   });
-
-  function checkPrice(dest, initial) {
-    if (doGeocode(dest.value) && doGeocode(initial.value)) {
-      console.log("Dest: " + dest.value);
-      console.log("Init: " + initial.value);
-    } else {
-      alert("Invalid locations!");
-    }
-  }
 
 });

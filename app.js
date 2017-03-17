@@ -1,13 +1,15 @@
 var express = require('express');
-var Yelp = require('yelp-api-v3');
 var bodyParser = require("body-parser");
 var path = require('path')
 
 
-var yelp = new Yelp({
-  app_id: "txMAKnMIAeAOHElQpTEyuA",
-  app_secret: "4yJqQck1j6FrkAYNjE5TAcv3LRxDGrOX9Bqmv8Zrh0LClppgUFWHEhdK6IymsHdp"
-});
+var Uber = require('uber-api')({
+  server_token: 'Owidg1RtQXyjl8PVxIMYbGLbr2RO3vXXNVw36qwQ',
+  version: 'v1'
+})
+
+
+
 
 var app = express();
 
@@ -24,49 +26,24 @@ app.get("/", function(req, res) {
 
 app.post("/search", function(req, res) {
   // get data from form and use it to search
-  var latitude = req.body.latitude;
-  var longitude = req.body.longitude;
+  var startLatitude = req.body.startLatitude;
+  var startLongitude = req.body.startLongitude;
+  var endLatitude = req.body.endLatitude;
+  var endLongitude = req.body.endLongitude;
   var results = {};
   var searches = [];
-  const searchByRating = {
-    term: 'restaurant',
-    latitude: latitude,
-    longitude: longitude,
-    radius: 16000,
-    limit: 1,
-    open_now: true,
-    sort_by: 'rating'
-  }
 
-  const searchByDistance = {
-    term: 'restaurant',
-    latitude: latitude,
-    longitude: longitude,
-    radius: 16000,
-    limit: 1,
-    open_now: true,
-    sort_by: 'distance'
-  }
+  Uber.getProducts(lat, lon, function(error, response) {
+    if (error) {
+      console.log(error);
+    } else {
+      console.log(response);
+    }
+  });
 
-  const searchByPrice = {
-    term: 'restaurant',
-    latitude: latitude,
-    longitude: longitude,
-    radius: 16000,
-    open_now: true,
-    limit: 1,
-    sort_by: 'best_match',
-    price: '1'
-  }
-
-
-  var ratingSearch = yelp.search(searchByRating);
-  var distanceSearch = yelp.search(searchByDistance);
-  var priceSearch = yelp.search(searchByPrice);
+  Uber.getPriceEstimate(lat, lon)
 
   searches.push(ratingSearch);
-  searches.push(distanceSearch);
-  searches.push(priceSearch);
 
   Promise.all(searches).then(function(data) {
     results.rating = JSON.parse(data[0]).businesses[0];
