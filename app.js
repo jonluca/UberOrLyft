@@ -100,6 +100,7 @@ app.post("/search", function(req, res) {
     results.lyft = data[1]["cost_estimates"];
     results.lyft_line = data[2]["cost_estimates"];
     results.lyft_plus = data[3]["cost_estimates"];
+
     res.send({
       results: results,
     });

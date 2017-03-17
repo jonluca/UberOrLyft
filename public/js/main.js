@@ -25,11 +25,22 @@ $(document).ready(function() {
     // Geocode the address
     geocoder.geocode({
       'address': dest.value
-    }, destinationResults);
+    }, function(results, status) {
+      if (status === google.maps.GeocoderStatus.OK && results.length > 0) {
 
-    geocoder.geocode({
-      'address': initial.value
-    }, startLocationResults);
+        destLat = results[0].geometry.location.lat();
+        destLong = results[0].geometry.location.lng();
+        geocoder.geocode({
+          'address': initial.value
+        }, startLocationResults);
+      // show an error if it's not
+      } else {
+        console.log(status);
+        console.log(results);
+      }
+    });
+
+
 
 
   }
@@ -49,9 +60,61 @@ $(document).ready(function() {
     });
   }
 
-  function showResults(data, code, jqXHR) {
+  function parseLyft(lyftResults, lyftMin) {
+    var high_price = parseInt(lyftResults["estimated_cost_cents_max"]);
+    var low_price = parseInt(lyftResults["estimated_cost_cents_min"]);
+    //divide by 200 because in cents
+    var average_price = Math.round((high_price + low_price) / 200);
 
-    console.log(data);
+    $('#lyftPrice').append(lyftResults["display_name"] + ": " + average_price + '\n');
+    if (lyftMin > average_price) {
+      return average_price;
+    }
+    return lyftMin;
+  }
+  function showResults(data, code, jqXHR) {
+    var uberPrices = {};
+    var uberResults = data["results"]["uber"]
+    var lyftResults = data["results"]["lyft"][0]
+    var lineResults = data["results"]["lyft_line"][0]
+    var plusResults = data["results"]["lyft_plus"][0]
+    /*Show three columns and new title*/
+    $('.choose').css('display', 'block');
+
+    $('.columns').css('display', 'block');
+
+
+    // $('#uber_image').css("background-image", "images/uber.jpg");
+    // $('#lyft_image').css("background-image", "images/lyft.jpg");
+
+    var uber_min = 1000000000;
+
+    for (var i = 0; i < uberResults.length; i++) {
+      $('#uberPrice').append(uberResults[i]["display_name"] + ": " + uberResults[i]["estimate"] + '\n')
+      var high_price = parseInt(uberResults[i]["high_estimate"]);
+      var low_price = parseInt(uberResults[i]["low_estimate"]);
+      var average_price = Math.round((high_price + low_price) / 2);
+      uberPrices[uberResults[i]["display_name"]] = average_price;
+      if (average_price < uber_min) {
+        uber_min = average_price;
+      }
+    }
+
+    var lyft_min = 100000000;
+    lyft_min = parseLyft(lyftResults, lyft_min);
+    lyft_min = parseLyft(lineResults, lyft_min);
+    lyft_min = parseLyft(plusResults, lyft_min);
+
+    if (lyft_min < uber_min) {
+      $('#title').text('Lyft is cheaper!');
+    } else if (lyft_min == uber_min) {
+      $('#title').text('They are about the same price!');
+    } else {
+      $('#title').text('Uber is cheaper!');
+    }
+
+
+    console.log(uberPrices);
 
   }
 
@@ -60,10 +123,8 @@ $(document).ready(function() {
 
       destLat = results[0].geometry.location.lat();
       destLong = results[0].geometry.location.lng();
-      counter -= 1;
-      if (counter == 0) {
-        comparePrices();
-      }
+
+      comparePrices();
     // show an error if it's not
     } else {
       console.log(status);

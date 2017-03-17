@@ -6,10 +6,28 @@
   <h1 class="text-center">Choose one!</h1>
 </div>
 <div class="container">
-  <div class="loading">
-    <div class="spinner"></div>
-  </div>
   <!--Search Page-->
+  <div class="columns">
+    <!--Lyft-->
+    <div class="column text-center">
+      <h1  class="text-center">Lyft</h1>
+      <div id="lyft_image" class ="crop text-center" style="background-image:url(images/lyft.png)">
+      </div>
+      <hr>
+      <h4 class="info" id="lyftPrice"></h4>
+    </div>
+
+    <!--Uber-->
+    <div class="column text-center">
+      <h1 class="text-center">Uber</h1>
+      <!--Uber Image-->
+      <div id="uber_image" class ="crop text-center" style="background-image:url(images/uber.jpg)">
+      </div>
+      <hr>
+      <h4 class="info" id="uberPrice"></h4>
+    </div>
+  </div>
+
   <div class="searchpage text-center">
     <label for="initField">Initial Location</label>
     <input id="initField" type="text" size="50">
@@ -19,6 +37,5 @@
     <br>
     <button class="btn btn-default" id="search">Check Price!</button>
   </div>
-  
 </div>
 <% include partials/footer%>
