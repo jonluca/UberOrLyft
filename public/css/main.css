@@ -11,8 +11,9 @@ body {
   background-color: #3FFF8F;
   color: white;
   margin: 10px;
+  margin-top: 50px;
   padding: 10px 50px;
-  transition: all .3s ease;
+  transition: all .5s ease;
   font-size: 28px;
 }
 
@@ -62,6 +63,10 @@ body {
 
 #title {
   font-size: 40px;
+}
+
+.searchBar{
+  width: 100%;
 }
 
 .crop {

@@ -85,9 +85,9 @@ $(document).ready(function() {
             average_price + "<br>");
         if (parseFloat(lyftMin) > parseFloat(average_price)) {
             if (high_price == low_price) {
-                $('#lyftBest').text('The cheapest lyft is ' + lyftResults["display_name"] + 'which costs  $' + (low_price / 100).toFixed(2));
+                $('#lyftBest').text('The cheapest lyft is ' + lyftResults["display_name"] + ' which costs  $' + (low_price / 100).toFixed(2));
             } else {
-                $('#lyftBest').text('The cheapest lyft is ' + lyftResults["display_name"] + 'which costs between $' + (low_price / 100).toFixed(2) + ' and $' + (high_price /
+                $('#lyftBest').text('The cheapest lyft is ' + lyftResults["display_name"] + ' which costs between $' + (low_price / 100).toFixed(2) + ' and $' + (high_price /
                     100).toFixed(2));
             }
             return average_price;
