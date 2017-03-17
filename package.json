@@ -1,0 +1,25 @@
+{
+  "name": "pickaplace",
+  "version": "1.0.0",
+  "description": "narrows down search results for yelp",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jonluca/PickAPlace.git"
+  },
+  "author": "JonLuca and Quinn",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jonluca/PickAPlace/issues"
+  },
+  "homepage": "https://github.com/jonluca/PickAPlace#readme",
+  "dependencies": {
+    "ejs": "^2.5.6",
+    "express": "^4.15.2",
+    "path": "^0.12.7",
+    "yelp-api-v3": "^1.5.0"
+  }
+}

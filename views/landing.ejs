@@ -1,0 +1,48 @@
+<% include partials/header %>
+<div class="container">
+  <h1 id="title" class="text-center">Pick A Place</h1>
+</div>
+<div class="choose">
+  <h1 class="text-center">Choose one!</h1>
+</div>
+<div class="container">
+  <div class="loading">
+    <div class="spinner"></div>
+  </div>
+  <!--Search Page-->
+  <div class="searchpage text-center">
+    <button class="btn btn-default" id="search">Locate Me!</button>
+    <input id="searchTextField" type="text" size="50">
+  </div>
+  <div class="columns">
+    <!--Search Page-->
+    <div class="column text-center">
+      <h1 class="category" class="text-center">Best Rating</h1>
+      <h3 class="restname" id="rateRest" class="text-center"></h3>
+      <div id="ratingImage" class ="crop text-center">
+      </div>
+      <hr>
+      <h4 class="info" id="ratePrice"></h4>
+      <button class = "btn btn-default" id="goRating" >Take me here!</button>
+    </div>
+    <div class="column text-center">
+      <h1 class="category" class="text-center">Lowest Price</h1>
+      <h3 class="restname" id="priceRest" class="text-center"></h3>
+      <div id="priceImage" class ="crop text-center">
+      </div>
+      <hr>
+      <h4 class="info" id="pricePrice"></h4>
+      <button class = "btn btn-default" id="goPrice" >Take me here!</button>
+    </div>
+    <div class="column text-center">
+      <h1 class="category" class="text-center">Closest</h1>
+      <h3 class="restname" id="distRest" class="text-center"></h3>
+      <div id="distanceImage" class ="crop text-center" >
+      </div>
+      <hr>
+      <h4 class="info" id="distPrice"></h4>
+      <button class = "btn btn-default" id="goDistance" >Take me here!</button>
+    </div>
+  </div>
+</div>
+<% include partials/footer%>
