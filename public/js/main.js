@@ -82,11 +82,14 @@ $(document).ready(function() {
         var average_price = round2Fixed((high_price + low_price) / 200);
 
         $('#lyftPrice').append(lyftResults["display_name"] + ": " + "$" +
-            average_price + '\n');
-        if (lyftMin > average_price) {
-            $('#lyftBest').text('The cheapest lyft is ' + lyftResults["display_name"] + 'which costs between $' + (low_price / 100).toFixed(2) + ' and $' + (high_price /
-                100).toFixed(2));
-
+            average_price + "<br>");
+        if (parseFloat(lyftMin) > parseFloat(average_price)) {
+            if (high_price == low_price) {
+                $('#lyftBest').text('The cheapest lyft is ' + lyftResults["display_name"] + 'which costs  $' + (low_price / 100).toFixed(2));
+            } else {
+                $('#lyftBest').text('The cheapest lyft is ' + lyftResults["display_name"] + 'which costs between $' + (low_price / 100).toFixed(2) + ' and $' + (high_price /
+                    100).toFixed(2));
+            }
             return average_price;
         }
         return lyftMin;
@@ -115,20 +118,19 @@ $(document).ready(function() {
             var low_price = parseInt(uberResults[i]["low_estimate"]);
             var average_price = round2Fixed((high_price + low_price) / 2);
             uberPrices[uberResults[i]["display_name"]] = average_price;
-            $('#uberPrice').append(uberResults[i]["display_name"] + ": " + "$" + average_price + '\n');
+            $('#uberPrice').append(uberResults[i]["display_name"] + ": " + "$" + average_price + "<br>");
 
-            if (average_price < uber_min) {
+            if (parseFloat(average_price) < parseFloat(uber_min)) {
                 uber_min = average_price;
             }
         }
 
         //This is bad coding, TODO fix it. Both hacky to get the name right and reiterating over an array :shudder:
-        for (var i = uberResults.length - 1; i > 0; i--) {
+        for (var i = uberResults.length - 1; i >= 0; i--) {
             var high_price = parseInt(uberResults[i]["high_estimate"]);
             var low_price = parseInt(uberResults[i]["low_estimate"]);
             var average_price = round2Fixed((high_price + low_price) / 2);
-            uberPrices[uberResults[i]["display_name"]] = average_price;
-            if (average_price == uber_min) {
+            if (parseInt(average_price) == parseInt(uber_min)) {
                 $('#uberBest').text('The cheapest uber is ' + uberResults[i]["display_name"] + ' which costs between $' + low_price + ' and $' + high_price);
             }
         }
@@ -138,7 +140,7 @@ $(document).ready(function() {
         lyft_min = parseLyft(lineResults, lyft_min);
         lyft_min = parseLyft(plusResults, lyft_min);
 
-        if (lyft_min < uber_min) {
+        if (parseFloat(lyft_min) < parseFloat(uber_min)) {
             $('#title').text('Lyft is cheaper! It costs about $' + lyft_min);
         } else if (lyft_min == uber_min) {
             $('#title').text('They are about the same price! They cost $' + uber_min);
