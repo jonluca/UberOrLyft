@@ -51,6 +51,8 @@ $(document).ready(function() {
 
   function showResults(data, code, jqXHR) {
 
+    console.log(data);
+
   }
 
   function destinationResults(results, status) {
