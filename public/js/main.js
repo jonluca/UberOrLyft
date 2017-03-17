@@ -66,7 +66,7 @@ $(document).ready(function() {
     //divide by 200 because in cents
     var average_price = Math.round((high_price + low_price) / 200);
 
-    $('#lyftPrice').append(lyftResults["display_name"] + ": " + average_price + '\n');
+    $('#lyftPrice').append(lyftResults["display_name"] + ": " + "$" + average_price + '\n');
     if (lyftMin > average_price) {
       return average_price;
     }
@@ -90,11 +90,12 @@ $(document).ready(function() {
     var uber_min = 1000000000;
 
     for (var i = 0; i < uberResults.length; i++) {
-      $('#uberPrice').append(uberResults[i]["display_name"] + ": " + uberResults[i]["estimate"] + '\n')
       var high_price = parseInt(uberResults[i]["high_estimate"]);
       var low_price = parseInt(uberResults[i]["low_estimate"]);
       var average_price = Math.round((high_price + low_price) / 2);
       uberPrices[uberResults[i]["display_name"]] = average_price;
+      $('#uberPrice').append(uberResults[i]["display_name"] + ": " + "$" + average_price + '\n')
+
       if (average_price < uber_min) {
         uber_min = average_price;
       }
@@ -106,11 +107,11 @@ $(document).ready(function() {
     lyft_min = parseLyft(plusResults, lyft_min);
 
     if (lyft_min < uber_min) {
-      $('#title').text('Lyft is cheaper!');
+      $('#title').text('Lyft is cheaper! It costs about $' + lyft_min);
     } else if (lyft_min == uber_min) {
-      $('#title').text('They are about the same price!');
+      $('#title').text('They are about the same price! They cost $' + uber_min);
     } else {
-      $('#title').text('Uber is cheaper!');
+      $('#title').text('Uber is cheaper! It costs about $' + uber_min);
     }
 
 

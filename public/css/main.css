@@ -83,6 +83,7 @@ body {
 .info {
   height: 100px;
   white-space: pre-line;
+  line-height: 30px;
 }
 
 }
