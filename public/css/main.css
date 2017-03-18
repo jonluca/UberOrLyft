@@ -75,6 +75,7 @@ body {
 
 .searchBar {
   width: 30% !important;
+  margin-right: 10px;
 }
 
 .crop {
