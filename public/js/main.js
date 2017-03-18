@@ -44,6 +44,7 @@ $(document).ready(function() {
     }
 
     function comparePrices() {
+        console.log('got to cp');
         $.ajax({
             method: 'POST',
             url: "/search",
@@ -102,7 +103,7 @@ $(document).ready(function() {
         var lyftResults = data["results"]["lyft"][0];
         var lineResults = data["results"]["lyft_line"][0];
         var plusResults = data["results"]["lyft_plus"][0];
-        /*Show three columns and new title*/
+        /*Show two columns and new title*/
         $('.choose').css('display', 'block');
 
         $('.columns').css('display', 'block');
@@ -186,6 +187,7 @@ $(document).ready(function() {
 
 
     $('#search').click(function() {
+        console.log('search clicked');
         var dest = document.getElementById('destField');
         var initial = document.getElementById('initField');
         if (dest.value == "" || initial.value == "") {

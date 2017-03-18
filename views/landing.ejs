@@ -1,4 +1,17 @@
 <% include partials/header %>
+<nav class="navbar navbar-default">
+  <div class="searchpage text-center">
+    <div class="navbar-form navbar-left fullNav">
+      <div class="form-group fullNav">
+        <label for="initField">Initial Location</label>
+        <input class="form-control searchBar" id="initField" type="text">
+        <label for="destField">Destination</label>
+        <input class="form-control searchBar" id="destField" type="text">
+        <button class="btn btn-default" id="search">Check Price!</button>
+      </div>
+    </div>
+  </div>
+</nav>
 <div class="container">
   <h1 id="title" class="text-center">Uber or Lyft?</h1>
 </div>
@@ -24,18 +37,6 @@
       <h4 class="info" id="uberPrice"></h4>
       <h3 class="uberinfo" id="uberBest"></h3>
     </div>
-  </div>
-  <div class="searchpage text-center">
-    <div>
-      <label for="initField">Initial Location</label>
-      <input class="searchBar" id="initField" type="text" size="90">
-      <br>
-      <br>
-      <label for="destField">Destination</label>
-      <input class="searchBar" id="destField" type="text" size="90">
-      <br>
-    </div>
-    <button class="btn btn-default" id="search">Check Price!</button>
   </div>
 </div>
 <% include partials/footer%>
