@@ -1,10 +1,17 @@
 @import url('https://fonts.googleapis.com/css?family=Raleway');
 
+html {
+  height: 100%;
+}
+
 body {
   font-family: 'Raleway', sans-serif;
   background-color: #FFFFFF;
   position: relative;
   min-height: 100%;
+  flex: 1;
+    flex-direction: column;
+
 }
 
 .btn-default {
@@ -23,9 +30,10 @@ body {
   background-color: #fff;
 }
 
-.fullNav{
-  width:100%;
+.fullNav {
+  width: 100%;
 }
+
 .columns {
   -webkit-column-count: 2; /* Chrome, Safari, Opera */
   -moz-column-count: 2; /* Firefox */
@@ -42,7 +50,11 @@ body {
 
 .column {
   padding-top: 20px;
-  min-height: 800px;
+  padding-bottom: 40px;
+  min-height: 600px;
+  -webkit-column-break-inside: avoid;
+  page-break-inside: avoid;
+  break-inside: avoid;
 }
 
 .choose {
@@ -51,7 +63,7 @@ body {
 }
 
 #footer {
-  position: fixed;
+  position: absolute;
   bottom: 0;
   width: 100%;
   height: 20px;   /* Height of the footer */
@@ -61,7 +73,7 @@ body {
   font-size: 40px;
 }
 
-.searchBar{
+.searchBar {
   width: 30% !important;
 }
 
@@ -84,7 +96,7 @@ body {
   line-height: 30px;
 }
 
-.uberinfo{
+.uberinfo {
   top: 200px;
   position: relative;
 }
