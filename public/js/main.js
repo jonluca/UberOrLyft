@@ -47,7 +47,7 @@ $(document).ready(function() {
         console.log('got to cp');
         $.ajax({
             method: 'POST',
-            url: "/search",
+            url: "/UberOrLyft/search",
             type: 'json',
             data: {
                 startLatitude: startLat,
