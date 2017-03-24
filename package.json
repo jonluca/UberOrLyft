@@ -22,6 +22,7 @@
     "path": "^0.12.7",
     "body-parser": "^1.17.1",
     "lyft-node": "^0.0.3",
-    "node-uber": "^1.0.0"
+    "node-uber": "^1.0.0",
+    "babel-polyfill": "*"
   }
 }
