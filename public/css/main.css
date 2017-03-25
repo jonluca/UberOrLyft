@@ -114,6 +114,7 @@ body {
   animation: load7 1.8s infinite ease-in-out;
 }
 .loader {
+  display: none;
   color: #ffffff;
   font-size: 10px;
   margin: 80px auto;
@@ -139,6 +140,7 @@ body {
 .loader:after {
   left: 3.5em;
 }
+
 @-webkit-keyframes load7 {
   0%,
   80%,
