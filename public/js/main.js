@@ -189,7 +189,7 @@ $(document).ready(function() {
 
 
     $('#search').click(function() {
-        $('.loader').css('display', 'block');
+        $('.loader').css('display', 'inline');
         var dest = document.getElementById('destField');
         var initial = document.getElementById('initField');
         if (dest.value == "" || initial.value == "") {

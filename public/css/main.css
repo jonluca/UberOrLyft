@@ -104,9 +104,10 @@ body {
 
 .loader {
   display: none;
+  margin-left: 20px;
   font-size: 10px;
-  width: 4em;
-  height: 4em;
+  width: 34px;
+  height: 34px;
   border-radius: 50%;
   background: #D233F9;
   background: -moz-linear-gradient(left, #D233F9 10%, rgba(255, 255, 255, 0) 42%);
@@ -132,7 +133,7 @@ body {
   content: '';
 }
 .loader:after {
-  background: #ffffff;
+  background: ##e7e7e7;
   width: 75%;
   height: 75%;
   border-radius: 50%;
