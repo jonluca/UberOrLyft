@@ -1,5 +1,4 @@
-$(document).ready(function() {
-
+function initializeMap() {
     function autocompleteStartLocation() {
         var dest = document.getElementById('destField');
         var autocomplete = new google.maps.places.Autocomplete(dest);
@@ -11,6 +10,9 @@ $(document).ready(function() {
     }
     google.maps.event.addDomListener(window, 'load', autocompleteStartLocation);
     google.maps.event.addDomListener(window, 'load', autocompleteDestination);
+}
+
+$(document).ready(function() {
 
     var startLat = "";
     var startLong = "";
