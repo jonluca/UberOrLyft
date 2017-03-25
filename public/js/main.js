@@ -159,8 +159,8 @@ $(document).ready(function() {
         if (status === google.maps.GeocoderStatus.OK && results.length > 0) {
             startLat = results[0].geometry.location.lat();
             startLong = results[0].geometry.location.lng();
+            //Only get here after valid destination, so ok to call compare prices
             comparePrices();
-
         // show an error if it's not
         } else {
             alert("Error with initial location field! Please try again and make sure the address is valid!");
