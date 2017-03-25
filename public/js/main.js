@@ -36,6 +36,7 @@ $(document).ready(function() {
                 }, startLocationResults);
             // show an error if it's not
             } else {
+                alert("Error with destination field! Please try again and make sure the address is valid!");
                 console.log(status);
                 console.log(results);
             }
@@ -44,6 +45,7 @@ $(document).ready(function() {
     }
 
     function comparePrices() {
+        //Ajax request to search with current location data. Callback is success function that displays results
         $.ajax({
             method: 'POST',
             url: "/UberOrLyft/search",
@@ -111,10 +113,6 @@ $(document).ready(function() {
 
         $('.columns').css('display', 'block');
 
-
-        // $('#uber_image').css("background-image", "images/uber.jpg");
-        // $('#lyft_image').css("background-image", "images/lyft.jpg");
-
         var uber_min = 1000000000;
 
         for (var i = 0; i < uberResults.length; i++) {
@@ -165,12 +163,14 @@ $(document).ready(function() {
 
         // show an error if it's not
         } else {
+            alert("Error with initial location field! Please try again and make sure the address is valid!");
             console.log(status);
             console.log(results);
         }
     }
 
 
+    //On click for search button
     $('#search').click(function() {
         $('.spinner').css('display', 'inline-table');
         var dest = document.getElementById('destField');
