@@ -98,7 +98,7 @@ $(document).ready(function() {
     }
 
     function showResults(data, code, jqXHR) {
-        $('.loader').css('display', 'none');
+        $('.spinner').css('display', 'none');
 
         var uberPrices = {};
         var uberResults = data["results"]["uber"];
@@ -189,7 +189,7 @@ $(document).ready(function() {
 
 
     $('#search').click(function() {
-        $('.loader').css('display', 'inline');
+        $('.spinner').css('display', 'inline-table');
         var dest = document.getElementById('destField');
         var initial = document.getElementById('initField');
         if (dest.value == "" || initial.value == "") {
