@@ -126,7 +126,7 @@ body {
 .loader:before {
   width: 50%;
   height: 50%;
-  background: #D233F9;
+  background: #ffffff;
   border-radius: 100% 0 0 0;
   position: absolute;
   top: 0;
@@ -135,7 +135,7 @@ body {
 }
 
 .loader:after {
-  background: ##e7e7e7;
+  background: #0dc5c1;
   width: 75%;
   height: 75%;
   border-radius: 50%;
