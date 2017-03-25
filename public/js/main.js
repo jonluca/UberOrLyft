@@ -18,13 +18,11 @@ $(document).ready(function() {
     var startLong = "";
     var destLat = "";
     var destLong = "";
-    var counter = 0;
     //Google maps api to validate address and get lat/long
 
     function checkPrice(dest, initial) {
         // Get geocoder instance
         var geocoder = new google.maps.Geocoder();
-        counter = 1;
         // Geocode the address
         geocoder.geocode({
             'address': dest.value
@@ -86,9 +84,11 @@ $(document).ready(function() {
         $('#lyftPrice').append(lyftResults["display_name"] + ": " + "$" +
             average_price + "<br>");
         if (parseFloat(lyftMin) > parseFloat(average_price)) {
+            //exact cost by Lyft
             if (high_price == low_price) {
                 $('#lyftBest').text('The cheapest lyft is ' + lyftResults["display_name"] + ' which costs  $' + (low_price / 100).toFixed(2));
             } else {
+                //Say about because it's variable
                 $('#lyftBest').text('The cheapest lyft is ' + lyftResults["display_name"] + ' which costs between $' + (low_price / 100).toFixed(2) + ' and $' + (high_price /
                     100).toFixed(2));
             }
@@ -101,6 +101,7 @@ $(document).ready(function() {
         $('.spinner').css('display', 'none');
 
         var uberPrices = {};
+        //Retreive specific prices by service
         var uberResults = data["results"]["uber"];
         var lyftResults = data["results"]["lyft"][0];
         var lineResults = data["results"]["lyft_line"][0];
@@ -117,12 +118,13 @@ $(document).ready(function() {
         var uber_min = 1000000000;
 
         for (var i = 0; i < uberResults.length; i++) {
+            //This simply gets the price, converts it to dollars and then displays it
             var high_price = parseInt(uberResults[i]["high_estimate"]);
             var low_price = parseInt(uberResults[i]["low_estimate"]);
             var average_price = round2Fixed((high_price + low_price) / 2);
             uberPrices[uberResults[i]["display_name"]] = average_price;
             $('#uberPrice').append(uberResults[i]["display_name"] + ": " + "$" + average_price + "<br>");
-
+            //find lowest price
             if (parseFloat(average_price) < parseFloat(uber_min)) {
                 uber_min = average_price;
             }
@@ -130,6 +132,7 @@ $(document).ready(function() {
 
         //This is bad coding, TODO fix it. Both hacky to get the name right and reiterating over an array :shudder:
         for (var i = uberResults.length - 1; i >= 0; i--) {
+            //reiterate over array BACKWARDS so that the cheapest uber isn't Nav or Espanol (as they are usually the same price as the cheapest)
             var high_price = parseInt(uberResults[i]["high_estimate"]);
             var low_price = parseInt(uberResults[i]["low_estimate"]);
             var average_price = round2Fixed((high_price + low_price) / 2);
@@ -137,6 +140,7 @@ $(document).ready(function() {
                 $('#uberBest').text('The cheapest uber is ' + uberResults[i]["display_name"] + ' which costs between $' + low_price + ' and $' + high_price);
             }
         }
+
 
         var lyft_min = 100000000;
         lyft_min = parseLyft(lyftResults, lyft_min);
@@ -151,35 +155,14 @@ $(document).ready(function() {
             $('#title').text('Uber is cheaper! It costs about $' + uber_min);
         }
 
-
-        console.log(uberPrices);
-
     }
-
-    function destinationResults(results, status) {
-        if (status === google.maps.GeocoderStatus.OK && results.length > 0) {
-
-            destLat = results[0].geometry.location.lat();
-            destLong = results[0].geometry.location.lng();
-
-            comparePrices();
-        // show an error if it's not
-        } else {
-            console.log(status);
-            console.log(results);
-        }
-    }
-
-
 
     function startLocationResults(results, status) {
         if (status === google.maps.GeocoderStatus.OK && results.length > 0) {
             startLat = results[0].geometry.location.lat();
             startLong = results[0].geometry.location.lng();
-            counter -= 1;
-            if (counter == 0) {
-                comparePrices();
-            }
+            comparePrices();
+
         // show an error if it's not
         } else {
             console.log(status);
