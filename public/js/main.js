@@ -46,7 +46,6 @@ $(document).ready(function() {
     }
 
     function comparePrices() {
-        console.log('got to cp');
         $.ajax({
             method: 'POST',
             url: "/UberOrLyft/search",
@@ -99,7 +98,8 @@ $(document).ready(function() {
     }
 
     function showResults(data, code, jqXHR) {
-        console.log(data);
+        $('.loader').css('display', 'none');
+
         var uberPrices = {};
         var uberResults = data["results"]["uber"];
         var lyftResults = data["results"]["lyft"][0];
@@ -189,7 +189,7 @@ $(document).ready(function() {
 
 
     $('#search').click(function() {
-        console.log('search clicked');
+        $('.loader').css('display', 'block');
         var dest = document.getElementById('destField');
         var initial = document.getElementById('initField');
         if (dest.value == "" || initial.value == "") {
