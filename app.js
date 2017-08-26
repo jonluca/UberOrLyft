@@ -28,14 +28,14 @@ app.use(bodyParser.urlencoded({
 
 app.set("view engine", "ejs");
 
-app.use('/UberOrLyft/', express.static(path.join(__dirname, 'public')));
+app.use('/', express.static(path.join(__dirname, 'public')));
 
 
-app.get("/UberOrLyft/", function(req, res) {
+app.get("/", function(req, res) {
     res.render("landing.ejs");
 });
 
-app.post("/UberOrLyft/search", function(req, res) {
+app.post("/search", function(req, res) {
     // get start/end locations
     var startLatitude = (req.body.startLatitude);
     var startLongitude = (req.body.startLongitude);
