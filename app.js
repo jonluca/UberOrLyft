@@ -3,25 +3,27 @@
 var express = require('express');
 var bodyParser = require("body-parser");
 var path = require('path');
+const config = require('./config');
 
 const Lyft = require('lyft-node').default;
 
 var Uber = require('node-uber');
 
 const uber = new Uber({
-    client_id: 'Ra6o6ImnIjtVraXGU5cWKWZvY9wBxlhQ',
-    client_secret: 'kFD6Sv9wNR-XehVuGz-d-J3qKrqdtqrLFNiCcwu9',
-    server_token: 'Owidg1RtQXyjl8PVxIMYbGLbr2RO3vXXNVw36qwQ',
+    client_id: config.client_id,
+    client_secret: config.client_secret,
+    server_token: config.server_token,
     redirect_uri: 'http://localhost:3000',
     name: 'PRICECHECK',
     language: 'en_US' // optional, defaults to en_US
 });
 
-const lyft = new Lyft('eg8N7BX5mD3B', 'blo3KyrXVCKAMO5dZtQpzLteo-UwAYvW');
+const lyft = new Lyft(config.lyft_one, config.lyft_two);
 
 
 var app = express();
-
+var helmet = require('helmet')
+app.use(helmet())
 app.use(bodyParser.urlencoded({
     extended: true
 }));
@@ -31,11 +33,11 @@ app.set("view engine", "ejs");
 app.use('/', express.static(path.join(__dirname, 'public')));
 
 
-app.get("/", function(req, res) {
+app.get("/", function (req, res) {
     res.render("landing.ejs");
 });
 
-app.post("/search", function(req, res) {
+app.post("/search", function (req, res) {
     // get start/end locations
     var startLatitude = (req.body.startLatitude);
     var startLongitude = (req.body.startLongitude);
@@ -93,7 +95,7 @@ app.post("/search", function(req, res) {
     searches.push(lyft_lineSearch);
     searches.push(lyft_plusSearch);
 
-    Promise.all(searches).then(function(data) {
+    Promise.all(searches).then(function (data) {
 
 
         results.uber = data[0]["prices"];
@@ -106,13 +108,13 @@ app.post("/search", function(req, res) {
         });
         res.end();
 
-    }).catch(function() {
+    }).catch(function () {
         console.log('failed promise?');
     });
 
 });
 
 
-app.listen(8082, function() {
+app.listen(8082, function () {
     console.log("Listening on port 8082");
 });
