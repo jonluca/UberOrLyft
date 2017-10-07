@@ -5,7 +5,7 @@ var bodyParser = require("body-parser");
 var path = require('path');
 const config = require('./config');
 
-const Lyft = require('lyft-node').default;
+const Lyft = require('lyft-node');
 
 var Uber = require('node-uber');
 
@@ -22,8 +22,8 @@ const lyft = new Lyft(config.lyft_one, config.lyft_two);
 
 
 var app = express();
-var helmet = require('helmet')
-app.use(helmet())
+var helmet = require('helmet');
+app.use(helmet());
 app.use(bodyParser.urlencoded({
     extended: true
 }));
@@ -33,11 +33,11 @@ app.set("view engine", "ejs");
 app.use('/', express.static(path.join(__dirname, 'public')));
 
 
-app.get("/", function (req, res) {
+app.get("/", function(req, res) {
     res.render("landing.ejs");
 });
 
-app.post("/search", function (req, res) {
+app.post("/search", function(req, res) {
     // get start/end locations
     var startLatitude = (req.body.startLatitude);
     var startLongitude = (req.body.startLongitude);
@@ -95,7 +95,7 @@ app.post("/search", function (req, res) {
     searches.push(lyft_lineSearch);
     searches.push(lyft_plusSearch);
 
-    Promise.all(searches).then(function (data) {
+    Promise.all(searches).then(function(data) {
 
 
         results.uber = data[0]["prices"];
@@ -108,13 +108,13 @@ app.post("/search", function (req, res) {
         });
         res.end();
 
-    }).catch(function () {
+    }).catch(function() {
         console.log('failed promise?');
     });
 
 });
 
 
-app.listen(8082, function () {
+app.listen(8082, function() {
     console.log("Listening on port 8082");
 });
