@@ -48,7 +48,7 @@ $(document).ready(function() {
         //Ajax request to search with current location data. Callback is success function that displays results
         $.ajax({
             method: 'POST',
-            url: "/UberOrLyft/search",
+            url: "search",
             type: 'json',
             data: {
                 startLatitude: startLat,
