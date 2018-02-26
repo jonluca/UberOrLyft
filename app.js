@@ -1,13 +1,13 @@
 'use es6';
 
-var express = require('express');
-var bodyParser = require("body-parser");
-var path = require('path');
+const express = require('express');
+const bodyParser = require("body-parser");
+const path = require('path');
 const config = require('./config');
 
 const Lyft = require('lyft-node');
 
-var Uber = require('node-uber');
+const Uber = require('node-uber');
 
 const uber = new Uber({
   client_id: config.client_id,
@@ -20,8 +20,8 @@ const uber = new Uber({
 
 const lyft = new Lyft(config.lyft_one, config.lyft_two);
 
-var app = express();
-var helmet = require('helmet');
+const app = express();
+const helmet = require('helmet');
 app.use(helmet());
 app.use(bodyParser.urlencoded({
   extended: true
@@ -37,17 +37,17 @@ app.get("/", function (req, res) {
 
 app.post("/search", function (req, res) {
   // get start/end locations
-  var startLatitude = (req.body.startLatitude);
-  var startLongitude = (req.body.startLongitude);
-  var endLatitude = (req.body.endLatitude);
-  var endLongitude = (req.body.endLongitude);
+  const startLatitude = (req.body.startLatitude);
+  const startLongitude = (req.body.startLongitude);
+  const endLatitude = (req.body.endLatitude);
+  const endLongitude = (req.body.endLongitude);
 
-  var results = {};
-  var searches = [];
+  const results = {};
+  const searches = [];
 
-  var uberSearch = uber.estimates.getPriceForRouteAsync(startLatitude, startLongitude, endLatitude, endLongitude);
+  const uberSearch = uber.estimates.getPriceForRouteAsync(startLatitude, startLongitude, endLatitude, endLongitude);
 
-  var regularLyft = {
+  const regularLyft = {
     start: {
       latitude: startLatitude,
       longitude: startLongitude
@@ -59,7 +59,7 @@ app.post("/search", function (req, res) {
     rideType: 'lyft'
   };
 
-  var lyft_line = {
+  const lyft_line = {
     start: {
       latitude: startLatitude,
       longitude: startLongitude
@@ -71,7 +71,7 @@ app.post("/search", function (req, res) {
     rideType: 'lyft_line'
   };
 
-  var lyft_plus = {
+  const lyft_plus = {
     start: {
       latitude: startLatitude,
       longitude: startLongitude
@@ -83,9 +83,9 @@ app.post("/search", function (req, res) {
     rideType: 'lyft_plus'
   };
 
-  var lyftSearch = lyft.getRideEstimates(regularLyft);
-  var lyft_lineSearch = lyft.getRideEstimates(lyft_line);
-  var lyft_plusSearch = lyft.getRideEstimates(lyft_plus);
+  const lyftSearch = lyft.getRideEstimates(regularLyft);
+  const lyft_lineSearch = lyft.getRideEstimates(lyft_line);
+  const lyft_plusSearch = lyft.getRideEstimates(lyft_plus);
 
   searches.push(uberSearch);
   searches.push(lyftSearch);
