@@ -1,52 +1,52 @@
 <% include partials/header %>
 <nav class="navbar navbar-default">
-  <div class="searchpage text-center">
-    <div class="navbar-form navbar-left fullNav">
-      <div class="form-group fullNav">
-        <label for="initField">Initial Location</label>
-        <input class="form-control searchBar" id="initField" type="text">
-        <label for="destField">Destination</label>
-        <input class="form-control searchBar" id="destField" type="text">
-        <button class="btn btn-default" id="search">Check Price!</button>
-        <span class="spinner">
+    <div class="searchpage text-center">
+        <div class="navbar-form navbar-left fullNav">
+            <div class="form-group fullNav">
+                <label for="initField">Initial Location</label>
+                <input class="form-control searchBar" id="initField" type="text">
+                <label for="destField">Destination</label>
+                <input class="form-control searchBar" id="destField" type="text">
+                <button class="btn btn-default" id="search">Check Price!</button>
+                <span class="spinner">
           <span class="double-bounce1"></span>
           <span class="double-bounce2"></span>
         </span>
-      </div>
+            </div>
+        </div>
     </div>
-  </div>
 </nav>
 <div class="container">
-  <h1 id="title" class="text-center">Uber or Lyft?</h1>
+    <h1 id="title" class="text-center">Uber or Lyft?</h1>
 </div>
 <div class="container">
-  <!--Search Page-->
-  <div class="columns">
-    <!--Lyft-->
-    <div class="column text-center">
-      <h1  class="text-center">Lyft</h1>
-      <div id="lyft_image" class ="crop text-center" style="background-image:url(images/lyft.png)">
-      </div>
-      <hr>
-      <div>
-        <h4 class="info" id="lyftPrice"></h4>
-        <h3 id="lyftBest"></h3>
-      </div>
+    <!--Search Page-->
+    <div class="columns">
+        <!--Lyft-->
+        <div class="column text-center">
+            <h1 class="text-center">Lyft</h1>
+            <div id="lyft_image" class="crop text-center" style="background-image:url(images/lyft.png)">
+            </div>
+            <hr>
+            <div>
+                <h4 class="info" id="lyftPrice"></h4>
+                <h3 id="lyftBest"></h3>
+            </div>
+        </div>
+        <!--Uber-->
+        <div class="column text-center">
+            <h1 class="text-center">Uber</h1>
+            <!--Uber Image-->
+            <div id="uber_image" class="crop text-center" style="background-image:url(images/uber.jpg)">
+            </div>
+            <hr>
+            <div>
+                <h4 class="info" id="uberPrice"></h4>
+                <h3 class="uberinfo" id="uberBest"></h3>
+            </div>
+        </div>
+        <br>
+        <br>
     </div>
-    <!--Uber-->
-    <div class="column text-center">
-      <h1 class="text-center">Uber</h1>
-      <!--Uber Image-->
-      <div id="uber_image" class ="crop text-center" style="background-image:url(images/uber.jpg)">
-      </div>
-      <hr>
-      <div>
-        <h4 class="info" id="uberPrice"></h4>
-        <h3 class="uberinfo" id="uberBest"></h3>
-      </div>
-    </div>
-    <br>
-    <br>
-  </div>
 </div>
-<% include partials/footer%>
+<% include partials/footer %>
