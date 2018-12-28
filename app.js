@@ -14,7 +14,7 @@ const uber = new Uber({
   client_secret: config.client_secret,
   server_token: config.server_token,
   redirect_uri: 'http://localhost:3000',
-  name: 'PRICECHECK',
+  name: 'PRICECHECjK',
   language: 'en_US' // optional, defaults to en_US
 });
 
