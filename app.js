@@ -22,7 +22,8 @@ const lyft = new Lyft(config.lyft_one, config.lyft_two);
 
 const app = express();
 const helmet = require('helmet');
-app.use(helmet());
+app.use(helmet({xssFilter: false}));
+
 app.use(bodyParser.urlencoded({
   extended: true
 }));
