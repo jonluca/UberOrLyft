@@ -4,7 +4,9 @@
   "description": "Cheapest ride share by destination and time!",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "snyk-protect": "snyk protect",
+    "prepare": "npm run snyk-protect"
   },
   "repository": {
     "type": "git",
@@ -23,6 +25,8 @@
     "helmet": "^3.15.0",
     "lyft-node": "^0.0.5",
     "node-uber": "^2.0.0",
-    "path": "^0.12.7"
-  }
+    "path": "^0.12.7",
+    "snyk": "^1.316.2"
+  },
+  "snyk": true
 }
